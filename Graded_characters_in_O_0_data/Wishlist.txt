@@ -12,9 +12,10 @@
 
 # To do/try:
 
-- convert R_order to 123
-- add functions "save_order" and "is_order_saved"
-- maybe add order condition in theta L (if order is saved)
+
+- change For_computer to Modules
+- Function "save_order" and "is_order_saved"
+- and order condition in theta L (if order is saved)
 
 - D6 join-irred
 
