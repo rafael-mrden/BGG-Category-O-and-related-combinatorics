@@ -1,0 +1,4 @@
+M(s3*s2*s4*s1*s2,s2*s4*s1*s2*s3*s2) ==  M(s2*s4*s1*s2,s2*s4*s3*s1*s2) + M(s2*s4*s1*s2,s2*s3*s1*s2*s4*s2*s3*s1*s2)
+M(s3*s2*s4*s1*s2,s4*s1*s2*s3*s2) ==  M(s2*s4*s1*s2,s4*s3*s1*s2) + M(s2*s4*s1*s2,s3*s1*s2*s4*s2*s3*s1*s2)
+M(s4*s2*s3*s1*s2,s2*s3*s1*s2*s4*s2) ==  M(s2*s3*s1*s2,s2*s4*s3*s1*s2) + M(s2*s3*s1*s2,s2*s3*s1*s2*s4*s2*s3*s1*s2)
+M(s4*s2*s3*s1*s2,s3*s1*s2*s4*s2) ==  M(s2*s3*s1*s2,s4*s3*s1*s2) + M(s2*s3*s1*s2,s3*s1*s2*s4*s2*s3*s1*s2)

@@ -1,0 +1,7 @@
+# Type: A1
+# Formatting: y x D_comb_proj_res of theta_y Delta_x
+
+e e [{('e', 0): 1}]
+e 1 [{('1', 0): 1}, {('e', -1): 1}]
+1 e [{('1', 0): 1}]
+1 1 [{('1', 1): 1}]

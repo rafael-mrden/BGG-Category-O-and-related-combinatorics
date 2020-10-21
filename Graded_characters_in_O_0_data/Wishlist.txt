@@ -1,0 +1,32 @@
+# Currently running:
+
+- F4: theta_x L_y
+
+- A5: theta_x L_y
+- D5: theta_x L_y
+
+- A6: T
+
+- H4 dissectors
+
+
+# To do/try:
+
+- convert R_order to 123
+- add functions "save_order" and "is_order_saved"
+- maybe add order condition in theta L (if order is saved)
+
+- D6 join-irred
+
+- B5: T, theta_x L_y, P
+
+- A6: theta_x L_y, P
+- D6: cells, order
+- B6: cells, order
+- E6: cells, order
+
+- A7: cells, Duflos, order, Delta, P, T, theta_x L_y
+
+- A9: counterexample to KM
+
+- A6: Kostant's problem

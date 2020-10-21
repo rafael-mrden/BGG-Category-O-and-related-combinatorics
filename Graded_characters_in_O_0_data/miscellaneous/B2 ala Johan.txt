@@ -1,0 +1,52 @@
+# Notation: theta_x(L(y)) = y * x
+# Equivalence classes on the set of all non-zero y * x (simples and tilting modules excluded), with relation being the equality of graded characters:
+# (In fact, in this type, two products in the same {...} are isomorphic! See "B2 elementary isomorphisms ala Johan.txt".)
+
+
+{ 212 * 212 , 2 * 2 }:
+
+-1: 2
+0: 21, e
+1: 2
+
+{ 2 * 212 , 212 * 2 }:
+
+-1: 212
+0: 21
+1: 212
+
+{ 12 * 212 , 12 * 2 , 1 * 12 , 121 * 12 }:
+
+-1: 12
+0: 121, 1
+1: 12
+
+{ 212 * 21 , 2 * 21 , 21 * 1 , 21 * 121 }:
+
+-1: 21
+0: 2, 212
+1: 21
+
+{ 12 * 21 }:
+
+-1: 121, 1
+0: 2*12, e
+1: 121, 1
+
+{ 1 * 1 , 121 * 121 }:
+
+-1: 1
+0: 12, e
+1: 1
+
+{ 121 * 1 , 1 * 121 }:
+
+-1: 121
+0: 12
+1: 121
+
+{ 21 * 12 }:
+
+-1: 2, 212
+0: 2*21, e
+1: 2, 212

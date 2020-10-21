@@ -1,0 +1,3 @@
+SagMath reads from them, and an error could go undetected for a long way.
+
+Deleting is OK, if done in all three folders, but it will have to be calculated again in SageMath.

@@ -1,0 +1,29 @@
+code:
+for d in D:
+    for z in W:
+
+        if (d,z.inverse()) in R:
+            X = M(d,z)
+            ad = earliest_occurence(d)
+
+            m = mult(X, ad  ,z)
+            if m >1:
+            
+                print("d=%s, z=%s, a(d)=%d, mult=%d" %(convert_to_123(d),convert_to_123(z),ad,m))
+
+########################################################
+
+[KMM'](d,z,z) does not hold for
+
+
+d=2312, z=323121, a(d)=2, mult=2
+d=2312, z=3123121, a(d)=2, mult=2
+d=2312, z=323123121, a(d)=2, mult=4
+d=323123, z=2312321, a(d)=2, mult=2
+d=323123, z=323123121, a(d)=2, mult=6
+d=31231, z=2312321, a(d)=3, mult=2
+d=31231, z=323123121, a(d)=3, mult=4
+d=312321, z=323123121, a(d)=4, mult=4
+d=2312312, z=231232, a(d)=3, mult=2
+d=2312312, z=323123121, a(d)=3, mult=9
+d=23123121, z=323123121, a(d)=4, mult=6

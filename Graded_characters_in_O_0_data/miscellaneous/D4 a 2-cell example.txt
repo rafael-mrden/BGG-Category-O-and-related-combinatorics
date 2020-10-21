@@ -1,0 +1,8 @@
+The smallest example of a 2-cell without any maximal element in a parabolic subgroup:
+Rows are left cells, columns are right cells, diagonal consist of Duflo involutions.
+(There is another example in [MMMTZ, p.40] in type B5, with a-value 11.)
+
+
+D4:
+
+[[s4*s2*s3*s1*s2*s4*s1*s2*s3*s2*s1, s2*s3*s1*s2*s4*s1*s2*s3*s2*s1, s4*s2*s3*s1*s2*s4*s1*s2*s3*s1, s4*s2*s3*s1*s2*s4*s2*s3*s2*s1], [s3*s1*s2*s4*s1*s2*s3*s1*s2*s1, s2*s3*s1*s2*s4*s1*s2*s3*s1*s2*s1, s3*s2*s4*s1*s2*s3*s1*s2*s1, s1*s2*s4*s1*s2*s3*s1*s2*s1], [s4*s2*s3*s1*s2*s4*s1*s2*s3*s2, s2*s3*s1*s2*s4*s1*s2*s3*s2, s4*s2*s3*s1*s2*s4*s1*s2*s3*s1*s2, s4*s2*s3*s1*s2*s4*s2*s3*s2], [s4*s2*s3*s1*s2*s4*s3*s1*s2*s1, s2*s3*s1*s2*s4*s3*s1*s2*s1, s4*s2*s3*s1*s2*s4*s1*s2*s1, s4*s2*s3*s1*s2*s4*s2*s3*s1*s2*s1]]
