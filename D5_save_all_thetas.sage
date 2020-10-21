@@ -1,7 +1,6 @@
 '''Graded characters in the regular block O_0.
 Note: Notation is dominant: L(e) is finite dimensional, Delta(e) is projective, Delta(w0) = L(w0), ...'''
 
-
 W = WeylGroup("D5", prefix="s")
 [s1,s2,s3,s4,s5] = W.simple_reflections()
 
@@ -807,7 +806,7 @@ import re    # Regular expressions!
 def save(char):
     '''Saves char to a file in the folder.
     In fact, it saves 
-    1. "char.component" dictionary to "./Graded_characters_in_O_0_data/For_computer/'type'/", under the name "dict_'name'.txt",
+    1. "char.component" dictionary to "./Graded_characters_in_O_0_data/Modules/'type'/", under the name "dict_'name'.txt",
     2. The output of print(char) string to "./Graded_characters_in_O_0_data/For_human/'type'/", under the name "'name'.txt".
     3. The output of print_clean(char) string to "./Graded_characters_in_O_0_data/For_human123/'type'/".
     Asterixes (*) are omitted from filenames.'''
@@ -818,7 +817,7 @@ def save(char):
     CT = CartanType(W)[0]+str(CartanType(W)[1])
     
     folder1 = 'Graded_characters_in_O_0_data'
-    For_computer = 'For_computer'    
+    For_computer = 'Modules'    
     path_computer = folder1 +'/' + For_computer     
     path_computer_CT = path_computer + '/' + CT
     
@@ -857,7 +856,7 @@ def is_saved(name, option1):    # option1 should be "read_it" or "only_bool".
     CT = CartanType(W)[0]+str(CartanType(W)[1])    # The names must be the same as in "save(char)" function.
     
     folder1 = 'Graded_characters_in_O_0_data'
-    For_computer = 'For_computer'
+    For_computer = 'Modules'
     
     name = format_star(name)    # remove asterixes from name
     
