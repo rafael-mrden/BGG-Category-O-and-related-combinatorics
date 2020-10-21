@@ -13,7 +13,6 @@
 # To do/try:
 
 
-- change For_computer to Modules
 - Function "save_order" and "is_order_saved"
 - and order condition in theta L (if order is saved)
 
