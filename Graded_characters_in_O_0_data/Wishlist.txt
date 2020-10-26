@@ -3,20 +3,22 @@
 - F4: theta_x L_y
 
 - A5: theta_x L_y
+
 - D5: theta_x L_y
 
 - A6: T
 
-- H4 dissectors
+- H4 dissectors/pictures
 
 
 # To do/try:
 
+- E6, E7, E8 pictures
 
 - Function "save_order" and "is_order_saved"
 - and order condition in theta L (if order is saved)
 
-- D6 join-irred
+- to save_all add thetas
 
 - B5: T, theta_x L_y, P
 

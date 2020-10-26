@@ -1554,3 +1554,6 @@ def join(S):
     
 # TODO:
 # 2-sided order for other types.
+
+
+print(DynkinDiagram(W))
