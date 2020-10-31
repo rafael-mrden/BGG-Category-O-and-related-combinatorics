@@ -211,7 +211,7 @@ for i in range(1,n+1):
                     else:
                         cov_gray.append(cov)
                 
-                grap = Q.plot(figsize = 8.3,cover_color="gray",element_shape = "s", cover_labels = cov_lb,
+                grap = Q.plot(figsize = 30,cover_color="gray",element_shape = "s", cover_labels = cov_lb,
                               cover_colors = {"red" : cov_red, "gray" : cov_gray}) #element_colors = colors, 
                 show(grap)
                 
