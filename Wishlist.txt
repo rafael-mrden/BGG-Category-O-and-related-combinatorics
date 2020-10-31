@@ -6,7 +6,9 @@
 
 - A6: T
 
-- D7 pictures
+- A7: Delta
+
+- A7: cells
 
 
 # To do/try:
@@ -25,7 +27,7 @@
 - B6: cells, order
 - E6: cells, order
 
-- A7: cells, Duflos, order, Delta, P, T, theta_x L_y
+- A7: order, P, T, theta_x L_y
 
 - A9: counterexample to KM
 

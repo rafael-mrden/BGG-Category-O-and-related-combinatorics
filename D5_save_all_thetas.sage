@@ -1583,10 +1583,20 @@ print(W_copy)
 
 i = 0
 
+folder = 'Graded_characters_in_O_0_data/Cells_and_orders/'
+file =  CartanType(W)[0]+str(CartanType(W)[1]) + "_right_order.txt"
+path = folder + file
+if os.path.isfile(path):
+    f = open(path, "r")
+    R_order_string = f.read()
+    f.close()
+
+print("Order loaded.")
+
 for x in W_copy:
     if x != e:
         for y in W_copy:
-            if R_smaller(x,y.inverse()):
+            if "(%s, %s)"%(convert_to_123(x),convert_to_123(y.inverse())) in R_order_string:
                 if not is_saved( "theta_%s(L(%s))"%(x,y) , "only_bool"):
                     save(theta(x,char_L(y)))
                     print("D5: saved theta_%s(L(%s))"%(x,y))

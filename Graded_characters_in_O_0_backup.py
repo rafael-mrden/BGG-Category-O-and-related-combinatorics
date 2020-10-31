@@ -905,7 +905,7 @@ def save_all(kind):
 
     i=0
     now = datetime.datetime.now()
-    print(str(i)+"/%d -"%total + now.strftime(" %H:%M:%S"))
+    print("Started: " + now.strftime(" %H:%M:%S"))
 
     for w in W:
         if is_saved("%s(%s)"%(kind,w), option1="only_bool") == False:
@@ -921,7 +921,7 @@ def save_all(kind):
 
         i+=1
         now = datetime.datetime.now()
-        print(str(i)+"/%d -"%total + now.strftime(" %H:%M:%S"))
+        print(CartanType(W)[0]+str(CartanType(W)[1]) + " " + kind + ": " + str(i)+"/%d -"%total + now.strftime(" %H:%M:%S"))
 
     print ("Finished with %s's!"%kind)
     return
