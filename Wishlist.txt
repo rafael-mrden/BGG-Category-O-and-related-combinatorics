@@ -1,34 +1,37 @@
 # Currently running:
 
-- F4: theta_x L_y
+- F4: thetaL
 
-- D5: theta_x L_y
+- D5: thetaL
 
 - A6: T
 
 - A7: Delta
 
-- A7: cells
+- D6: cells
 
 
 # To do/try:
 
-- E7, E8 pictures
 
-- Function "save_order" and "is_order_saved"
-- and order condition in theta L (if order is saved)
+- B5: T, P, thetaL
 
-- to save_all add thetas
+- A6: P, thetaL
 
-- B5: T, theta_x L_y, P
+- D6: Duflos, order
 
-- A6: theta_x L_y, P
-- D6: cells, order
-- B6: cells, order
-- E6: cells, order
+- B6: cells, Duflos, order
+
+- E6: cells, Duflos, order
 
 - A7: order, P, T, theta_x L_y
+
+
+#
+
 
 - A9: counterexample to KM
 
 - A6: Kostant's problem
+
+- Two-sided order for other types

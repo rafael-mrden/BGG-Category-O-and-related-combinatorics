@@ -2,8 +2,8 @@
 Note: Notation is dominant: L(e) is finite dimensional, Delta(e) is projective, Delta(w0) = L(w0), ...'''
 
 
-W = WeylGroup("A7", prefix="s")
-[s1,s2,s3,s4,s5,s6,s7] = W.simple_reflections()
+W = WeylGroup("D4", prefix="s")
+[s1,s2,s3,s4] = W.simple_reflections()
 
 ##################################################################################
 
@@ -831,22 +831,7 @@ def save(char):
 
     file_computer = open(path_computer_CT + "/dict_%s.txt"%name_without_asterix, "w+")        
     file_computer.write(str(char.component))     # Saves as a dictionary - usefull if I want to load back.    
-    file_computer.close()
-    
-    # Saves to For_human123 - useful if I want to look at it.
-    #name = format_star(char.name)
-    #if ".txt" not in name:
-    #    name = name + ".txt"
-    #new_filename = name.replace("(1)","(e)").replace("s","").replace("_","").replace("theta","theta_")    
-    #string = char.__str__()       
-    #path_part1 = "Graded_characters_in_O_0_data/For_human123/"    
-    #path_part2 = "Graded_characters_in_O_0_data/For_human123/" + CT    
-    #for path in [path_part1, path_part2]:
-    #    if not os.path.isdir(path):  # Is there a folder already?
-    #        os.mkdir(path)        # If not, create one.          
-    #f2 = open(path_part2 + "/" + new_filename,"w")
-    #string = f2.write(convert_to_123_long(string))
-    #f2.close()    
+    file_computer.close()  
     
 
 def is_saved(name, option1):    # option1 should be "read_it" or "only_bool".
@@ -898,31 +883,71 @@ def is_saved(name, option1):    # option1 should be "read_it" or "only_bool".
 
 
 def save_all(kind):
-    '''Saves to external files all standard object of the given kind = "L", "Delta", "Nabla", "P", "I" or "T".
-    See function "save".'''
+    '''Saves to external files all standard object of the given kind = "Delta", "P", "T" or "thetaL".
+    See function "save".
+    In case thetaL, simple modules (i.e. theta_e(L(x))) are skipped.'''
     
     total = len(W)
 
     i=0
     now = datetime.datetime.now()
     print("Started: " + now.strftime(" %H:%M:%S"))
+    
+    if kind != "thetaL":
 
-    for w in W:
-        if is_saved("%s(%s)"%(kind,w), option1="only_bool") == False:
+        for w in W:
+            if is_saved("%s(%s)"%(kind,w), option1="only_bool") == False:
 
-            if kind == "Delta":
-                save(char_Delta(w))
+                if kind == "Delta":
+                    save(char_Delta(w))
 
-            if kind == "P":
-                save(char_P(w))
+                if kind == "P":
+                    save(char_P(w))
 
-            if kind == "T":
-                save(char_T(w))
+                if kind == "T":
+                    save(char_T(w))
 
-        i+=1
-        now = datetime.datetime.now()
-        print(CartanType(W)[0]+str(CartanType(W)[1]) + " " + kind + ": " + str(i)+"/%d -"%total + now.strftime(" %H:%M:%S"))
+            i+=1
+            now = datetime.datetime.now()
+            print(CartanType(W)[0]+str(CartanType(W)[1]) + " " + kind + ": " + str(i)+"/%d -"%total + now.strftime(" %H:%M:%S"))
 
+    if kind == "thetaL":
+        
+        CT = CartanType(W)[0]+str(CartanType(W)[1])
+        
+        if not is_order_saved():
+            print("Order not saved. Saving order first...")
+            save_order()
+            
+        folder = 'Graded_characters_in_O_0_data/Cells_and_orders/'
+        file =  CT + "_right_order.txt"
+        path = folder + file
+        if os.path.isfile(path):
+            f = open(path, "r")
+            R_order_string = f.read()
+            f.close()
+        print("Order loaded.")
+    
+        def le(x):
+            return x.length()
+
+        W_copy = list(W)
+        W_copy.sort(key=le)    
+        print("W sorted.")
+    
+        i = 0
+
+        for x in W_copy:
+            if x != e:
+                for y in W_copy:
+                    if "(%s, %s)"%(convert_to_123(x),convert_to_123(y.inverse())) in R_order_string:
+                        if not is_saved( "theta_%s(L(%s))"%(x,y) , "only_bool"):
+                            save(theta(x,char_L(y)))
+                            print(CT + ": saved theta_%s(L(%s))"%(x,y))
+                            print("%d/%d - "%(i,total) + str(datetime.datetime.now()))
+            i += 1
+            print("*"*20 + "\n%d/%d: x=%s done!\n"%(i,total,convert_to_123(x)) + "*"*20)
+          
     print ("Finished with %s's!"%kind)
     return
     
@@ -1099,7 +1124,7 @@ def cell(side, w):
     return KL_graph(side).strongly_connected_component_containing_vertex(w)   # In types other than A we use way slower procedure.
     
     
-def are_left_cells_saved():
+def are_cells_saved():
     '''Return "True" iff left cells are saved.'''
     
     folder = 'Graded_characters_in_O_0_data/Cells_and_orders/'
@@ -1114,7 +1139,7 @@ def L_cell(w):
     if w==e:
         return [e]
     
-    if are_left_cells_saved():
+    if are_cells_saved():
         folder = 'Graded_characters_in_O_0_data/Cells_and_orders/'
         file =  CartanType(W)[0]+str(CartanType(W)[1]) + "_left_cells.txt"
         path = folder + file
@@ -1177,10 +1202,10 @@ def cells(side):
 def save_cells():
     '''Calculates and saves left cells.'''
     
-    print("Already saved: %s"%are_left_cells_saved())
+    print("Cells already saved: %s"%are_cells_saved())
     CL = cells("left")
 
-    def eval_number(st): # Need this to remove quotation marks from 123-notation, except for "e"
+    def eval_number(st): # Need this to remove quotation marks from 123-notation, except for "e".
         if st == "e":
             return st
         return eval(st)
@@ -1191,7 +1216,7 @@ def save_cells():
     f = open("Graded_characters_in_O_0_data/Cells_and_orders/%s_left_cells.txt"%CT,"w")
     f.write(str(result))
     f.close()
-    print("Now saved: %s"%are_left_cells_saved())
+    print("Cells now saved: %s"%are_cells_saved())
     return
 
 
@@ -1214,8 +1239,14 @@ def two_smaller(w,v):
     return w_partition.dominates(v_partition)
 
 
-# This could take forever to load. Comment it unless using KL orders which are not saved.
-#all_paths = cells_graph("left").all_simple_paths(trivial=True) 
+
+def is_order_saved():
+    '''Return "True" iff right order is saved.'''
+    
+    folder = 'Graded_characters_in_O_0_data/Cells_and_orders/'
+    file =  CartanType(W)[0]+str(CartanType(W)[1]) + "_right_order.txt"
+    path = folder + file
+    return os.path.isfile(path)
 
 
 def L_smaller(x,y):
@@ -1230,11 +1261,11 @@ def L_smaller(x,y):
     if (x == w0 and y != w0) or (y == e and x != e):
         return False
     
-    # If it is already saved
-    folder = 'Graded_characters_in_O_0_data/Cells_and_orders/'
-    file =  CartanType(W)[0]+str(CartanType(W)[1]) + "_right_order.txt"
-    path = folder + file
-    if os.path.isfile(path):
+    if is_order_saved(): # If it is already saved:
+        folder = 'Graded_characters_in_O_0_data/Cells_and_orders/'
+        file =  CartanType(W)[0]+str(CartanType(W)[1]) + "_right_order.txt"
+        path = folder + file
+
         f = open(path, "r")
         R_order_string = f.read()
         f.close()  
@@ -1277,11 +1308,12 @@ def strictly_L_smaller(x,y):
         else:
             return True        
         
-    # If it is already saved
-    folder = 'Graded_characters_in_O_0_data/Cells_and_orders/'
-    file =  CartanType(W)[0]+str(CartanType(W)[1]) + "_right_order.txt"
-    path = folder + file
-    if os.path.isfile(path):
+    if is_order_saved(): # If it is already saved:
+        
+        folder = 'Graded_characters_in_O_0_data/Cells_and_orders/'
+        file =  CartanType(W)[0]+str(CartanType(W)[1]) + "_right_order.txt"
+        path = folder + file
+
         if L_smaller(x,y) and not L_smaller(y,x):
             return True
         else:
@@ -1322,35 +1354,34 @@ def strictly_R_smaller(x,y):
     return strictly_L_smaller(x.inverse(),y.inverse())
 
 
-def L_relation():
-    '''Returns the set of all pairs (x,y) where x is left-smaller or left-equivalent to y.
-    It is probably faster to run this once, than to use L_smaller very often.'''
+def save_order():
+    '''Calculates and saves right order.'''
+    
+    print("Order already saved: %s"%is_order_saved())
+    
+    # This could take forever to calculate. There probably exists more efficient way.
+    all_paths = cells_graph("left").all_simple_paths(trivial=True) 
 
-    L = cells("l")
-    L_rel = set()
+    def eval_number(st): # Need this to remove quotation marks from 123-notation, except for "e".
+        if st == "e":
+            return st
+        return eval(st)
+
+    result = set()
 
     for path in all_paths:
         Y = path[0]
         X = path[-1]
         for x in X:
             for y in Y:
-                L_rel.add( (x,y) )
-            
-    return L_rel
-
-
-def R_relation():
-    '''Returns the set of all pairs (x,y) where x is right-smaller or right-equivalent to y.
-    It is probably faster to run this once, than to use R_smaller very often.'''
-
-    L_rel = L_relation()
-    R_rel = set()
+                result.add( (eval_number(convert_to_123(x.inverse())),eval_number(convert_to_123(y.inverse()))) )
     
-    for pair in L_rel:
-        R_rel.add( (pair[0].inverse(), pair[1].inverse()) )
-    
-    return R_rel
-
+    CT = CartanType(W)[0]+str(CartanType(W)[1])
+    f = open("Graded_characters_in_O_0_data/Cells_and_orders/%s_right_order.txt"%CT,"w")
+    f.write(str(result))
+    f.close()
+    print("Order now saved: %s"%is_order_saved())
+    return
 
     
 ######################## Lusztig's a function ###############################
@@ -1388,7 +1419,7 @@ def Duflo_Involutions():
     '''Returns the list of Duflo involutions.'''
      
     # If it is already saved
-    if are_Duflos_saved():
+    if are_Duflo_involutions_saved():
         folder = 'Graded_characters_in_O_0_data/Cells_and_orders/'
         file =  CartanType(W)[0]+str(CartanType(W)[1]) + "_Duflo_involutions.txt"
         path = folder + file
@@ -1423,7 +1454,7 @@ def Duflo_Involutions():
     return lis
 
 
-def are_Duflos_saved():
+def are_Duflo_involutions_saved():
     '''Return "True" iff Duflo involutions are saved.'''
     
     folder = 'Graded_characters_in_O_0_data/Cells_and_orders/'
@@ -1435,14 +1466,14 @@ def are_Duflos_saved():
 def save_Duflo_involutions():
     '''Calculates and saves Duflo involutions.'''
     
-    print("Already saved: %s"%are_Duflos_saved())
+    print("Duflo involutions already saved: %s"%are_Duflo_involutions_saved())
     D = Duflo_Involutions()
     
     def l(x):   # Needed to sort D
         return x.length()
     D.sort(key = l)
     
-    def eval_number(st): # Need this to remove quotation marks from 123-notation, except for "e"
+    def eval_number(st): # Need this to remove quotation marks from 123-notation, except for "e".
         if st == "e":
             return st
         return eval(st)
@@ -1453,7 +1484,7 @@ def save_Duflo_involutions():
     f = open("Graded_characters_in_O_0_data/Cells_and_orders/%s_Duflo_involutions.txt"%CT,"w")
     f.write(str(result))
     f.close()
-    print("Now saved: %s"%are_Duflos_saved())
+    print("Duflo involutions now saved: %s"%are_Duflo_involutions_saved())
     return
 
 
@@ -1521,39 +1552,8 @@ def print_Delta_flag(X):
 
 
 
-################## some extra stuff ##################
-
-def lower_intersection_Deltas(x,y):
-    return (shift(char_Delta(x),-x.length())).min_character(shift(char_Delta(y),-y.length()))
-
-def upper_intersection_Deltas(x,y):
-    virtual = shift(char_Delta(x),-x.length())+shift(char_Delta(y),-y.length())-char_Delta(e)
-    virtual.only_positive()
-   
-    return virtual
-
-
-#W_poset = W.bruhat_poset()
-
-def join(S):
-    SS = [convert_from_123(a) for a in S if a not in W] + [a for a in S if a in W]
-    
-    U = set(W.bruhat_interval(SS[0],w0))
-    for a in SS[1:]:
-        U = U.intersection(set(W.bruhat_interval(a,w0)))
-        
-    minU = (W_poset.subposet(list(U))).minimal_elements()
-    
-    if len(minU)==1:
-        j = minU[0]
-        return eval(convert_to_123(str(j)))
-    else:
-        return minU
-
-
-    
-# TODO:
-# 2-sided order for other types.
-
 
 print(DynkinDiagram(W))
+    
+
+    
