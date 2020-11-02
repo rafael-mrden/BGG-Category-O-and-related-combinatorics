@@ -2,8 +2,8 @@
 Note: Notation is dominant: L(e) is finite dimensional, Delta(e) is projective, Delta(w0) = L(w0), ...'''
 
 
-W = WeylGroup("D4", prefix="s")
-[s1,s2,s3,s4] = W.simple_reflections()
+W = WeylGroup("A2", prefix="s")
+[s1,s2] = W.simple_reflections()
 
 ##################################################################################
 
@@ -890,8 +890,7 @@ def save_all(kind):
     total = len(W)
 
     i=0
-    now = datetime.datetime.now()
-    print("Started: " + now.strftime(" %H:%M:%S"))
+    print("Started: " + str(datetime.datetime.now()))  
     
     if kind != "thetaL":
 
@@ -908,8 +907,7 @@ def save_all(kind):
                     save(char_T(w))
 
             i+=1
-            now = datetime.datetime.now()
-            print(CartanType(W)[0]+str(CartanType(W)[1]) + " " + kind + ": " + str(i)+"/%d -"%total + now.strftime(" %H:%M:%S"))
+            print(CartanType(W)[0]+str(CartanType(W)[1]) + " " + kind + ": " + str(i)+"/%d -"%total + str(datetime.datetime.now()))
 
     if kind == "thetaL":
         

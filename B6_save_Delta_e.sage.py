@@ -1561,7 +1561,7 @@ def print_Delta_flag(X):
 print(DynkinDiagram(W))
     
 now = datetime.datetime.now()
-print("Started: " + now.strftime(" %H:%M:%S")) 
+print("Started: " + str(datetime.datetime.now())) 
     
 save(char_Delta(e))
 
