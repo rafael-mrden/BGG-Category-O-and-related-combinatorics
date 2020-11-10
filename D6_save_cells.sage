@@ -1,3 +1,8 @@
+from sage.interfaces.gap import  get_gap_memory_pool_size, set_gap_memory_pool_size
+set_gap_memory_pool_size(24364842180)
+
+
+
 '''Graded characters in the regular block O_0.
 Note: Notation is dominant: L(e) is finite dimensional, Delta(e) is projective, Delta(w0) = L(w0), ...'''
 

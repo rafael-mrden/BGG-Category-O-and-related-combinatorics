@@ -1,3 +1,8 @@
+from sage.interfaces.gap import  get_gap_memory_pool_size, set_gap_memory_pool_size
+set_gap_memory_pool_size(24364842180)
+
+
+
 W = WeylGroup("E8", prefix="s")
 [s1,s2,s3,s4,s5,s6,s7,s8] = W.simple_reflections()
 
