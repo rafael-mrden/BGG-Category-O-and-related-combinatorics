@@ -1,0 +1,86 @@
+folder = 'Graded_characters_in_O_0_data/Cells_and_orders/'
+file =  CartanType(W)[0]+str(CartanType(W)[1]) + "_right_order.txt"
+path = folder + file
+f = open(path, "r")
+R_order_string = f.read()
+f.close()  
+
+
+def L_smaller(x,y):
+    '''Checks whether x is left-smaller than or left-equivalent to y, for x,y in W.
+    For this the line "#all_paths = cells_graph("left").all_simple_paths(trivial=True)" must be uncommented,
+    but this may take forever to load.
+    In general, extremly inefficient.'''
+    
+    if x == e or y == w0:
+        return True
+    
+    if (x == w0 and y != w0) or (y == e and x != e):
+        return False
+    
+
+
+    if "(%s, %s)"%(convert_to_123(x.inverse()),convert_to_123(y.inverse())) in R_order_string:
+        return True
+    else:
+        return False    
+		
+		
+
+
+
+
+i = 0
+for x in [s2*s3,s2*s4]:
+    j=0
+    for y in W:
+        print(i,j)
+        if not R_smaller(x,y.inverse()):
+            
+            for s in AL(x).intersection(DR(y)):
+                
+                LHS = {}
+                if R_smaller(s*x,y.inverse()):
+                    LHS[s*x] = 1
+                
+                for z in W.bruhat_interval(e,x):
+                    if (x.length()-z.length())%2==1:
+                        if (s*z).bruhat_le(z):
+                            mu_ = mu(z,x)
+                            if mu_ != 0:
+                                if R_smaller(z,y.inverse()):
+                                    LHS[z]=mu_
+                                
+                RHS = {}
+                if R_smaller(x,s*y.inverse()):
+                    RHS[y*s] = 1
+                
+                for w in W.bruhat_interval(y,w0):
+                    if (w.length()-y.length())%2==1:
+                        if w.bruhat_le(w*s):
+                            mu_ = mu(y,w)
+                            if mu_ != 0:
+                                if R_smaller(x,w.inverse()):
+                                    RHS[w]=mu_
+
+#                LHS_char = char_0()
+                LHS_mult = 0
+                for z in LHS:
+#                    LHS_char += LHS[z]*M(z,y)
+                    LHS_mult += LHS[z]
+
+#                RHS_char = char_0()
+                RHS_mult = 0
+                for w in RHS:
+#                    RHS_char += RHS[w]*M(x,w)
+                    RHS_mult += RHS[w]
+                
+#                print(LHS_char==RHS_char)
+                if LHS_mult != RHS_mult:
+                    print("Problem with")
+                    print(x,s,y)
+                    print(LHS)
+                    print(RHS)
+                    print()
+        j += 1
+    i += 1

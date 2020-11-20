@@ -337,7 +337,7 @@ def join(S):
         return minU
 
 
-def JM(w):
+def JM_old(w):
     if w not in W:
         w = convert_from_123(w)
     result = W_poset.subposet([x for x in join_irreducibles if x.bruhat_le(w) ]).maximal_elements()
@@ -348,7 +348,7 @@ def BM(w):
         w = convert_from_123(w)
     return W_poset.subposet([x for x in bigrassmannians if x.bruhat_le(w) ]).maximal_elements()
 
-def JM2(w):
+def JM_old(w):
     if w not in W:
         w = convert_from_123(w)
     DLw = DL(w)
@@ -359,3 +359,169 @@ def JM2(w):
         if list(DL(x))[0] in DLw and list(DR(x))[0] in DRw:
             result.append(x)
     return result
+
+def JM(w):
+    if w not in W:
+        w = convert_from_123(w)
+    result = W_poset.subposet([x for x in join_irreducibles if x.bruhat_le(w) ]).maximal_elements()
+    result = [convert_from_123(convert_to_123(x)) for x in result]   # How else to get the back from the subposet back to W
+    
+    # New version (but it is the same in types A and B):
+    result_mod = [x for x in result if list(DL(x))[0] in DL(w) and list(DR(x))[0] in DR(w) ]
+    
+#    print(result == result_mod)   checking whether JM=JM'. Should be true in A, seems also true in B.
+    
+    return result_mod
+
+
+
+
+
+########################################
+### First attempt on tetrahedron
+
+Delta_e = char_Delta(e)
+penultimate = two_cell(s1*w0)
+
+def coords(w): # For w in the penultimate cell
+    if w not in W:
+        w = convert_from_123(w)
+    return ( eval(convert_to_123(list(AL(w))[0])), eval(convert_to_123(list(AR(w))[0])))
+
+def transform(p):
+    q = list(p)
+    q[2] = -q[2]
+    return tuple(q)
+
+def label(p):
+    return "\\tiny $%s$"%(p,)   # Comment this line if labels are not wanted
+    return ""
+
+def col(p):
+    if p[-1]==1:
+        return "black"
+    if p[-1]==2:
+        return "red"
+
+N = n+1
+def tetrahedron_tikz():
+    points = []
+    
+    h_min = a(penultimate[0])
+    h_max = l(w0)-1
+    
+    for w in penultimate:
+        heights = dict_mult(Delta_e,w)
+        for k in heights:
+            points.append( (coords(w)[0] , coords(w)[1] , k , heights[k]) )
+    
+    lines = []
+    for w1 in penultimate:
+        for w2 in penultimate:
+            if w1.length()+1 == w2.length() and w1.bruhat_le(w2):
+                lines.append( ( (coords(w1)[0],coords(w1)[1],w1.length(),1), (coords(w2)[0],coords(w2)[1],w2.length(),1) ) )
+
+#    for l1 in lines:
+#        for l2 in lines:
+#            if l1[1]==l2[0] and (l1[0],l2[1]) in lines:
+#                lines.remove((l1[0],l2[1]))               
+
+#    print("%% Tetrahedron, n=%d"%N)
+    print("\\tdplotsetmaincoords{110}{130} \n\\begin{tikzpicture}[tdplot_main_coords, scale=2]\n")  
+
+    # Print points
+    for p in points:
+        print("\\filldraw[%s] %s circle (1.5pt) node[anchor=west] {%s};"%(col(p),transform(p)[:3],label(p[:3])))
+        
+    print()
+
+    # Print lines
+    for line in lines:
+        p,q = line
+
+        print("\\draw %s -- %s;"%(transform(p)[:3],transform(q)[:3]))
+    
+    print()
+    
+    # Print cube
+
+    top  = l(w0)-1
+    bottom = a(penultimate[0])
+    A = [(1,1,border) for border in [bottom,top]]
+    B = [(1,N-1,border) for border in [bottom,top]]
+    C = [(N-1,N-1,border) for border in [bottom,top]]
+    D = [(N-1,1,border) for border in [bottom,top]]
+    
+    for i in range(2):
+        print("\\draw[gray, dashed] %s -- %s -- %s -- %s -- cycle;" %( transform(A[i]), transform(B[i]), transform(C[i]), transform(D[i])))
+    for p in [A,B,C,D]:
+        print("\\draw[gray, dashed] %s -- %s;" %(transform(p[0]),transform(p[1])) )
+#    print("\\draw[gray, dashed] %s -- %s;" %(transform(A[0]),transform(C[0])) )
+#    print("\\draw[gray, dashed] %s -- %s;" %(transform(A[1]),transform(C[1])) )    
+                
+    print("\n\\end{tikzpicture}\n")        
+#    return (points,lines)
+
+
+
+
+
+
+
+
+###### Plotes latex code for the positions of the penultimate part of the Delta_e
+
+def penultimate_tikz(i,j):
+    
+    labels = ["circle", "cross"]
+    
+    Delta_e = char_Delta(e)
+    penultimate = two_cell(s1*w0)    # Or get it by another means.
+    
+    # The following is nedeed before \begin{document}:
+    # \usepackage{tikz,tikz-cd,tikz-3dplot}
+    # \usetikzlibrary{shapes.misc}
+    # \tikzset{cross/.style={cross out, draw=black, minimum size=2*(#1-\pgflinewidth), inner sep=0pt, outer sep=0pt},
+    # cross/.default={2.5pt}}
+
+    points = {}
+    
+    k_max = a(penultimate[0])
+    k_min = w0.length()-1
+    
+    for w in penultimate:
+        if convert_from_123(str(i)) in AL(w) and convert_from_123(str(j)) in AR(w):
+            
+            w_num = eval(convert_to_123(w))
+            points[w_num] = []
+            
+            heights = dict_mult(Delta_e,w)   # Or get the KLP directly.
+            for k in heights:
+                (points[w_num]).append( (k , heights[k]) )
+                
+                if k < k_min:
+                    k_min = k
+                if k > k_max:
+                    k_max = k
+
+    print("\\begin{tikzpicture}[scale=.7, yscale=-1, xscale=2]    % adjustable scales\n")
+    print("\\node[anchor=west] at (-1,%d) {$%s_%s$ penultimate $(%d,%d)$};\n" %(k_min-2,CartanType(W)[0],CartanType(W)[1],i,j))
+
+    count = 0
+    y_ploted = []
+    
+    for w in points:
+        for p in points[w]:
+            
+            if p[0] not in y_ploted:
+                print("\\node[] at (-1,%d) {$%s$:};" %(p[0],p[0]))
+                y_ploted.append(p[0])
+            
+            for i in range(p[1]):
+                print("\\draw (%f,%d) node[%s,draw,inner sep=2pt] {};"%(count+i/5, p[0], labels[count]))
+        
+        print("\\draw (-1,%d) node[%s,draw,inner sep=2pt] {};"%(k_max+2+count, labels[count]))
+        print("\\node[circle,anchor=west] at (-1,%d) {$ = %s$};" %(k_max+2+count, w  ))
+        count += 1
+        
+    print("\n\\end{tikzpicture}")

@@ -1,4 +1,4 @@
-######################################################################
+#####################################################################
 # Combinatorial projective resolutions of for general graded characters
 
 
@@ -71,13 +71,98 @@ def proj_dim(X):
     (assuming it exists and is less than 1000.'''
     
     return len(proj_resolution_param(X,1000))-1
+
+
+def D_proj_resolution_theta_Delta(y,x):
+    '''Restores the resolution of theta_y Delta_x that was calculated by "Delta-combinatorics.ipynb"
+    and saved in "Graded_characters_in_O_0_data/miscellaneous/" in a "'type'.txt".
+    Works only up to (including) rank 3.'''
+    
+    if x not in W:
+        x = convert_from_123(x)
+    if y not in W:
+        y = convert_from_123(y)
+        
+    CT = CartanType(W)[0]+str(CartanType(W)[1])
+    
+    f = open("Graded_characters_in_O_0_data/miscellaneous/%s_comb_proj_res.txt"%CT, "r")
+    file = f.read()
+    f.close()
+    
+    lines = file.split("\n")
+    
+    start = "%s %s "%(convert_to_123(y),convert_to_123(x))
+    result_str = ""
+    
+    for line in lines:
+        if line.startswith(start):
+            result_str = line[len(start):]
+            break
+    if result_str == "":
+        raise ValueError("Not saved?")
+    
+    res = eval(result_str)
+    new_res = []
+    
+    for P in res:
+        new_P = {}
+        for f in P:
+            new_P[( convert_from_123(f[0]) , f[1] )] = P[f]
+        new_res.append(new_P)
+        
+    return new_res
+    
+    
+    
+def d(v,w):
+    return -1+len(D_proj_resolution_theta_Delta(w.inverse()*w0,v.inverse()))    
+    
     
 
+
+
+###############################################
+
+
+
+
+
+for v in W:
+    for w in W:    
+        I = [ list(W.simple_reflections()).index(s)+1 for s in AR(w)]
+        v_ = v.coset_representative(I, side='left')
+        
+        vW_I = [x*v for x in W_(I)]
     
+        B = b(v_,w)
+        B_ = b(w.inverse(),v_.inverse())
+        
+        D = d(v,w)
+        diff = B-D
+
+        y = w.inverse()*w0
+        x = v.inverse()
+        
+        cond = False
+        for v_ in vW_I:
+            if b(v_,w) >=0:
+                cond = True
+                break
+        
+        if not cond:
+            print(v,w)
 
 
 
 
+
+
+
+
+
+
+
+###############################################
 
 
 

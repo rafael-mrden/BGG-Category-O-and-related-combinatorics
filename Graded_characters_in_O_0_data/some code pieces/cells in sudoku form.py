@@ -245,5 +245,82 @@ def penultimate_two_cell_latex_v2():
     
     print(result)
 	
+
+
+
+
+
+
+### KLP's for the penultimate cell in the table format
+
+def sort_asc(w):
+    return eval(convert_to_123(list(AL(w))[0]))
+
+def l(w):
+    return w.length()
+
+def list_descends(S):
+    result = [convert_to_123(s) for s in S]
+    result.sort()
+    return ", ".join(result)
+
+def coeff_one(i):
+    if i != 1:
+        return str(i)
+    else:
+        return ""
+    
+def KLPv_e(w):
+    p = KLP(e,w)
+    l = w.length()
+    pv = sum(p.coefficients()[i] * q^(l - 2*p.exponents()[i]) for i in range(len(p.exponents())))
+    
+    # Format pv nicely for latex:
+    
+    return " + ".join([ coeff_one(pv.coefficients()[i])+"v^{%s}"%pv.exponents()[i] for i in range(len(pv.exponents())) ])
+
+def penultimate_two_cell_latex():
+	
+	Cell = two_cell(s1*w0)
+	DufCell = [d for d in Cell if d in Duflo_Involutions()]
+	DufCell.sort(key=sort_asc)
+
+	DufCell_dict = {}
+	for d in DufCell:
+		Ld = L_cell(d)
+		Rd = [x.inverse() for x in Ld]
+		DufCell_dict[d]=(Rd,Ld)
+
+	Cell_table = [[[] for x in DufCell] for x in DufCell]
+	for i in range(len(DufCell)):
+		for j in range(len(DufCell)):
+
+			intersect = [x for x in DufCell_dict[DufCell[i]][0] if x in DufCell_dict[DufCell[j]][1] ]
+			intersect.sort(key=l)
+			if i == j:
+				intersect.remove(DufCell[i])
+				intersect = [DufCell[i]] + intersect
+
+			if len(intersect)==1:
+				Cell_table[j][i] = "$"+KLPv_e(intersect[0])+"$"
+			else:
+				Cell_table[j][i] = "\\begin{tabular}{@{}l@{}}" + (" \\"+"\\ ").join(["$"+KLPv_e(x)+"$" for x in intersect]) + "\\end{tabular}"
+
+
+
+	print("\\begin{tabular}{|l||%s|}"%("|").join(["l"]*(len(DufCell)) ))
+
+	print("\\hline")
+	print( " $%s_%d$ & "%(CartanType(W)[0],CartanType(W)[1]) + " & ".join([ " $%s$ "%convert_to_123(AL(DufCell[i])) for i in range(len(DufCell))] ) )
+	print(" \\"+"\\")
+
+	print("\\hline"*2)
+	for i in range(len(Cell_table)):
+		row = Cell_table[i]
+
+
+		print(" & ".join([" $%s$ "%convert_to_123(AR(DufCell[i]))] + row) + " \\"+"\\"+" \\hline")
+
+	print("\\end{tabular}\n")
 	
 	
