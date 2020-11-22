@@ -1563,7 +1563,7 @@ nr_proc = 5
 print("nr_proc=%d"%nr_proc)
     
 
-leng = 8   # up to 24.
+leng = 9   # up to 24.
 
 
 W_len = [w for w in W if w.length()==leng]
@@ -1577,7 +1577,7 @@ size = total // nr_proc
 
 ########################
 
-this_proc = 0         # for this_proc in range(nr_proc):
+this_proc = 2         # for this_proc in range(nr_proc):
 
 
 print("this_proc=%d"%this_proc)
