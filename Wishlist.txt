@@ -40,10 +40,13 @@
 +----++------------+------------+------------+------------+------------+------------+------------+
 
 
-- A9: counterexample to KM
+
+
+- Left-right order: make more logical, without inverting twice
+- Save characters in 123-notation
+- Two-sided order for other types
+- Fix all the code, write documentation, upload as an installable package
 
 - A6: Kostant's problem
 
-- Two-sided order for other types
-- Left-right order: make more logical, without inverting twice
-- Fix all the code, write documentation, upload as an installable package
+- A9: counterexample to KM

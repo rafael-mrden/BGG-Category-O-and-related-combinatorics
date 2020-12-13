@@ -337,6 +337,26 @@ def join(S):
         return minU
 
 
+
+def join_B(S):
+    '''Here should S consists of join-irreds with fixed descents.'''
+    
+    SS = [convert_from_123(a) for a in S if a not in W] + [a for a in S if a in W]
+    bigrassmannians_fixed = [x for x in bigrassmannians if DL(x)==DL(SS[0]) and DR(x)==DR(SS[0])]
+    
+    U = set(x for x in bigrassmannians_fixed if (SS[0]).bruhat_le(x) )
+    for a in SS[1:]:
+        U = U.intersection(set(x for x in bigrassmannians_fixed if a.bruhat_le(x) ))
+        
+    minU = (W_subposet(list(U))).minimal_elements()
+    
+    if len(minU)==1:
+        j = minU[0]
+        return eval(convert_to_123(str(j)))
+    else:
+        return [eval(convert_to_123(x)) for x in minU]
+        
+        
 def JM_old(w):
     if w not in W:
         w = convert_from_123(w)

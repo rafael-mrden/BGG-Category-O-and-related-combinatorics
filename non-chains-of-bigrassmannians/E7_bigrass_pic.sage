@@ -126,9 +126,22 @@ def AR(w):
 
 
 
-W_poset = W.bruhat_poset()
+# W_poset = W.bruhat_poset()
 
-print("poset loaded")
+# W_poset = W.bruhat_poset()
+
+def W_subposet(L):
+    '''This is equivalent to W.bruhat_poset().subposet(),
+    but without calculating the full W.bruhat_poset().'''
+    
+    def br_le(x,y):
+        return x.bruhat_le(y)    
+    return Poset((L,br_le))
+
+
+
+
+
 
 def join(S):
     SS = [convert_from_123(a) for a in S if a not in W] + [a for a in S if a in W]
@@ -137,7 +150,7 @@ def join(S):
     for a in SS[1:]:
         U = U.intersection(set(W.bruhat_interval(a,w0)))
         
-    minU = (W_poset.subposet(list(U))).minimal_elements()
+    minU = (W_subposet(list(U))).minimal_elements()
     
     if len(minU)==1:
         j = minU[0]
@@ -148,13 +161,13 @@ def join(S):
 def JM(w):
     if w not in W:
         w = convert_from_123(w)
-    result = W_poset.subposet([x for x in join_irreducibles if x.bruhat_le(w) ]).maximal_elements()
+    result = W_subposet([x for x in join_irreducibles if x.bruhat_le(w) ]).maximal_elements()
     return [convert_from_123(convert_to_123(x)) for x in result]
 
 def BM(w):
     if w not in W:
         w = convert_from_123(w)
-    return W_poset.subposet([x for x in bigrassmannians if x.bruhat_le(w) ]).maximal_elements()
+    return W_subposet([x for x in bigrassmannians if x.bruhat_le(w) ]).maximal_elements()
 
 def JM2(w):
     if w not in W:
@@ -225,7 +238,7 @@ for i in range(1,n+1):
     for j in range(1,n+1):
         bigrassmannians_fixed = [x for x in bigrassmannians if DR(x)=={W.simple_reflections()[i]} and DL(x)=={W.simple_reflections()[j]}]
         if bigrassmannians_fixed != []:
-            P = W_poset.subposet(bigrassmannians_fixed)
+            P = W_subposet(bigrassmannians_fixed)
             if True: #not P.is_chain():
                 Q = P.relabel(lambda x: convert_to_123(x)+"(%d)"%x.length())
                 colors =  { "yellow" : [ Q(convert_to_123(x)+"(%d)"%x.length()) for x in bigrassmannians_fixed if x not in join_irreducibles]}
