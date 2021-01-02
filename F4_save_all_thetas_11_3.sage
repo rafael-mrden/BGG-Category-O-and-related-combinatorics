@@ -1,6 +1,23 @@
 ##############################################################
 # Parallel calculation of theta L's for F4.
 
+'''Graded characters in the regular block O_0.
+Note: Notation is dominant: L(e) is finite dimensional, Delta(e) is projective, Delta(w0) = L(w0), ...'''
+
+
+W = WeylGroup("F4", prefix="s")
+[s1,s2,s3,s4] = W.simple_reflections()
+
+##################################################################################
+
+n = rank(W)
+w0 = W.long_element()
+e = W(1)
+
+##################################################################################
+
+
+
 nr_proc = 7
 print("nr_proc=%d"%nr_proc)
     
@@ -26,18 +43,7 @@ this_proc = 3         # for this_proc in range(nr_proc):
 
 
 
-'''Graded characters in the regular block O_0.
-Note: Notation is dominant: L(e) is finite dimensional, Delta(e) is projective, Delta(w0) = L(w0), ...'''
 
-
-W = WeylGroup("F4", prefix="s")
-[s1,s2,s3,s4] = W.simple_reflections()
-
-##################################################################################
-
-n = rank(W)
-w0 = W.long_element()
-e = W(1)
 
 
 ####### Kazhdan-Lusztig polynomials ##########################
