@@ -49,6 +49,12 @@ def KLP(x,y):
 #    - faster way: KLP(x,y) 
 
 
+R.<v> = LaurentPolynomialRing(QQ)
+def KLPv(x,y):
+    '''v-normalization: degree in the polynomial agrees with the graded degree in the Verma module.'''
+    return KLP(x, y)(q=1/v^2) * v^(y.length()-x.length())
+
+
 def mu(w,x):
     '''Returns the KL mu-function with arguments w,x.
     By Humphrey's BGG book p. 175 and p. 169, for w<x we have:
