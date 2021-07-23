@@ -43,10 +43,10 @@
 
 
 - Left-right order: make more logical, without inverting twice
-- Save characters in 123-notation
+- Save GradedChar's in 123-notation
 - Two-sided order for other types
-- Fix all the code, write documentation, upload as an installable package
+- Organize the "unorganized" folder
+- Write documentation, upload as an installable package
 
 - A6: Kostant's problem
-
-- A9: counterexample to KM
+- A9: Counterexample to KM
