@@ -1,0 +1,160 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="SageMath code for calculations of graded characters of some modules in BGG category O for semisimple Lie algebras.">
+    <meta name="keywords" content="Kazhdan-Lusztig polynomials, Graded characters, BGG category O, Semisimple Lie algebra, Representation theory, SageMath">
+    <meta name="author" content="Rafael Mrðen">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" type="text/css" href="../../mystyle.css">
+
+  <title>Graded characters in BGG category O</title>
+
+  </head>
+  <body>
+
+
+<table style="width:100%">
+  <tr>
+    <th align="left"><h2> A3 </h2></th>
+  </tr>
+</table>
+
+<b>Duflo involutions (a-function), total 10:</b> e(0), 3(1), 2(1), 1(1), 31(2), 2312(2), 232(3), 121(3), 12321(3), 123121(6)
+
+<br /><br />
+
+
+<b>KL-cells:</b>
+<br /><br />
+
+<table border="1">
+<tr>
+<td>a=0</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>e</td>
+</tr>
+</table>
+<br /><br />
+
+<table border="1">
+<tr>
+<td>a=1</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>21</td>
+<td>321</td>
+</tr>
+<tr>
+<td>2</td>
+<td>12</td>
+<td>2</td>
+<td>32</td>
+</tr>
+<tr>
+<td>3</td>
+<td>123</td>
+<td>23</td>
+<td>3</td>
+</tr>
+</table>
+<br /><br />
+
+<table border="1">
+<tr>
+<td>a=2</td>
+<td>2</td>
+<td>1, 3</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2312</td>
+<td>312</td>
+</tr>
+<tr>
+<td>1, 3</td>
+<td>231</td>
+<td>31</td>
+</tr>
+</table>
+<br /><br />
+
+<table border="1">
+<tr>
+<td>a=3</td>
+<td>1, 2</td>
+<td>1, 3</td>
+<td>2, 3</td>
+</tr>
+<tr>
+<td>1, 2</td>
+<td>121</td>
+<td>3121</td>
+<td>23121</td>
+</tr>
+<tr>
+<td>1, 3</td>
+<td>1231</td>
+<td>12321</td>
+<td>2321</td>
+</tr>
+<tr>
+<td>2, 3</td>
+<td>12312</td>
+<td>1232</td>
+<td>232</td>
+</tr>
+</table>
+<br /><br />
+
+<table border="1">
+<tr>
+<td>a=6</td>
+<td>1, 2, 3</td>
+</tr>
+<tr>
+<td>1, 2, 3</td>
+<td>123121</td>
+</tr>
+</table>
+<br /><br />
+<b>Some modules:</b><br />
+
+
+
+
+<?php
+$files = array();
+$dir = opendir('.'); // open the cwd..also do an err check.
+while(false != ($file = readdir($dir))) {
+        if(($file != ".") and ($file != "..") and ($file != "index.php")) {
+                $files[] = $file; // put in array.
+        }   
+}
+
+natsort($files); // sort.
+
+// print.
+foreach($files as $file) {
+        echo("<a href='$file'>$file</a> <br />\n");
+}
+?>
+
+
+
+<br /><br />
+
+<a href="../">Back</a>
+
+
+
+</body>
+</html>

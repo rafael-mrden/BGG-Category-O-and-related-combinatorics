@@ -1,0 +1,409 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="SageMath code for calculations of graded characters of some modules in BGG category O for semisimple Lie algebras.">
+    <meta name="keywords" content="Kazhdan-Lusztig polynomials, Graded characters, BGG category O, Semisimple Lie algebra, Representation theory, SageMath">
+    <meta name="author" content="Rafael Mrðen">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" type="text/css" href="../../mystyle.css">
+
+  <title>Graded characters in BGG category O</title>
+
+  </head>
+  <body>
+
+
+<table style="width:100%">
+  <tr>
+    <th align="left"><h2> D4 </h2></th>
+  </tr>
+</table>
+
+
+<b>Duflo involutions (a-function), total 36:</b> e(0), 1(1), 2(1), 3(1), 4(1), 43(2), 31(2), 41(2), 2412(2), 2312(2), 2432(2), 324123(2), 124321(2), 423124(2), 242(3), 121(3), 232(3), 431(3), 32423(3), 24312(3), 12321(3), 12421(3), 324232(6), 124121(6), 123121(6), 31241231(6), 31242321(6), 42312431(6), 2312423121(6), 4231242312(6), 2312412312(6), 42312412312(7), 42312423121(7), 42312412321(7), 23124123121(7), 423124123121(12)
+
+<br /><br /> 
+
+<b>KL-cells:</b>
+<br /><br />
+
+<table border="1">
+<tr>
+<td>a=0</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>e</td>
+</tr>
+</table>
+<br /><br />
+
+<table border="1">
+<tr>
+<td>a=1</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>21</td>
+<td>321</td>
+<td>421</td>
+</tr>
+<tr>
+<td>2</td>
+<td>12</td>
+<td>2</td>
+<td>32</td>
+<td>42</td>
+</tr>
+<tr>
+<td>3</td>
+<td>123</td>
+<td>23</td>
+<td>3</td>
+<td>423</td>
+</tr>
+<tr>
+<td>4</td>
+<td>124</td>
+<td>24</td>
+<td>324</td>
+<td>4</td>
+</tr>
+</table>
+<br /><br />
+
+<table border="1">
+<tr>
+<td>a=2</td>
+<td>2</td>
+<td>1, 3</td>
+<td>4</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2312</td>
+<td>312</td>
+<td>42312</td>
+</tr>
+<tr>
+<td>1, 3</td>
+<td>231</td>
+<td>31</td>
+<td>4231</td>
+</tr>
+<tr>
+<td>4</td>
+<td>23124</td>
+<td>3124</td>
+<td>423124</td>
+</tr>
+</table>
+<br /><br />
+
+<table border="1">
+<tr>
+<td>a=2</td>
+<td>2</td>
+<td>3</td>
+<td>1, 4</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2412</td>
+<td>32412</td>
+<td>412</td>
+</tr>
+<tr>
+<td>3</td>
+<td>24123</td>
+<td>324123</td>
+<td>4123</td>
+</tr>
+<tr>
+<td>1, 4</td>
+<td>241</td>
+<td>3241</td>
+<td>41</td>
+</tr>
+</table>
+<br /><br />
+
+<table border="1">
+<tr>
+<td>a=2</td>
+<td>1</td>
+<td>2</td>
+<td>3, 4</td>
+</tr>
+<tr>
+<td>1</td>
+<td>124321</td>
+<td>24321</td>
+<td>4321</td>
+</tr>
+<tr>
+<td>2</td>
+<td>12432</td>
+<td>2432</td>
+<td>432</td>
+</tr>
+<tr>
+<td>3, 4</td>
+<td>1243</td>
+<td>243</td>
+<td>43</td>
+</tr>
+</table>
+<br /><br />
+
+<table border="1">
+<tr>
+<td>a=3</td>
+<td>1, 2</td>
+<td>1, 3</td>
+<td>1, 4</td>
+<td>2, 3</td>
+<td>2, 4</td>
+<td>2</td>
+<td>3, 4</td>
+<td>1, 3, 4</td>
+</tr>
+<tr>
+<td>1, 2</td>
+<td>121<br />1243121</td>
+<td>3121<br />31243121</td>
+<td>4121<br />12423121</td>
+<td>23121<br />3243121</td>
+<td>24121<br />2423121</td>
+<td>243121</td>
+<td>423121<br />324121</td>
+<td>43121</td>
+</tr>
+<tr>
+<td>1, 3</td>
+<td>1231<br />12412321</td>
+<td>12321<br />312412321</td>
+<td>41231<br />1242321</td>
+<td>2321<br />32412321</td>
+<td>241231<br />242321</td>
+<td>2412321</td>
+<td>42321<br />3241231</td>
+<td>412321</td>
+</tr>
+<tr>
+<td>1, 4</td>
+<td>1241<br />23124321</td>
+<td>31241<br />3124321</td>
+<td>12421<br />423124321</td>
+<td>324321<br />231241</td>
+<td>2421<br />42312421</td>
+<td>2312421</td>
+<td>32421<br />4231241</td>
+<td>312421</td>
+</tr>
+<tr>
+<td>2, 3</td>
+<td>12312<br />1241232</td>
+<td>1232<br />31241232</td>
+<td>124232<br />412312</td>
+<td>232<br />3241232</td>
+<td>24232<br />2412312</td>
+<td>241232</td>
+<td>4232<br />32412312</td>
+<td>41232</td>
+</tr>
+<tr>
+<td>2, 4</td>
+<td>12412<br />2312432</td>
+<td>312432<br />312412</td>
+<td>1242<br />42312432</td>
+<td>32432<br />2312412</td>
+<td>242<br />4231242</td>
+<td>231242</td>
+<td>3242<br />42312412</td>
+<td>31242</td>
+</tr>
+<tr>
+<td>2</td>
+<td>124312</td>
+<td>3124312</td>
+<td>1242312</td>
+<td>324312</td>
+<td>242312</td>
+<td>24312<br />231242312</td>
+<td>3242312</td>
+<td>4312<br />31242312</td>
+</tr>
+<tr>
+<td>3, 4</td>
+<td>124123<br />231243</td>
+<td>31243<br />3124123</td>
+<td>12423<br />4231243</td>
+<td>3243<br />23124123</td>
+<td>2423<br />42312423</td>
+<td>2312423</td>
+<td>32423<br />423124123</td>
+<td>312423</td>
+</tr>
+<tr>
+<td>1, 3, 4</td>
+<td>12431</td>
+<td>312431</td>
+<td>124231</td>
+<td>32431</td>
+<td>24231</td>
+<td>2431<br />23124231</td>
+<td>324231</td>
+<td>431<br />3124231</td>
+</tr>
+</table>
+<br /><br />
+
+<table border="1">
+<tr>
+<td>a=6</td>
+<td>1, 2, 3</td>
+<td>2, 4</td>
+<td>1, 3, 4</td>
+</tr>
+<tr>
+<td>1, 2, 3</td>
+<td>123121</td>
+<td>24123121</td>
+<td>4123121</td>
+</tr>
+<tr>
+<td>2, 4</td>
+<td>23124312</td>
+<td>4231242312</td>
+<td>423124312</td>
+</tr>
+<tr>
+<td>1, 3, 4</td>
+<td>2312431</td>
+<td>423124231</td>
+<td>42312431</td>
+</tr>
+</table>
+<br /><br />
+
+<table border="1">
+<tr>
+<td>a=6</td>
+<td>1, 2, 4</td>
+<td>2, 3</td>
+<td>1, 3, 4</td>
+</tr>
+<tr>
+<td>1, 2, 4</td>
+<td>124121</td>
+<td>23124121</td>
+<td>3124121</td>
+</tr>
+<tr>
+<td>2, 3</td>
+<td>12412312</td>
+<td>2312412312</td>
+<td>312412312</td>
+</tr>
+<tr>
+<td>1, 3, 4</td>
+<td>1241231</td>
+<td>231241231</td>
+<td>31241231</td>
+</tr>
+</table>
+<br /><br />
+
+<table border="1">
+<tr>
+<td>a=6</td>
+<td>1, 2</td>
+<td>1, 3, 4</td>
+<td>2, 3, 4</td>
+</tr>
+<tr>
+<td>1, 2</td>
+<td>2312423121</td>
+<td>312423121</td>
+<td>32423121</td>
+</tr>
+<tr>
+<td>1, 3, 4</td>
+<td>231242321</td>
+<td>31242321</td>
+<td>3242321</td>
+</tr>
+<tr>
+<td>2, 3, 4</td>
+<td>23124232</td>
+<td>3124232</td>
+<td>324232</td>
+</tr>
+</table>
+<br /><br />
+
+<table border="1">
+<tr>
+<td>a=7</td>
+<td>1, 2, 3</td>
+<td>2, 3, 4</td>
+<td>1, 3, 4</td>
+<td>1, 2, 4</td>
+</tr>
+<tr>
+<td>1, 2, 3</td>
+<td>23124123121</td>
+<td>324123121</td>
+<td>3124123121</td>
+<td>124123121</td>
+</tr>
+<tr>
+<td>2, 3, 4</td>
+<td>231241232</td>
+<td>42312412312</td>
+<td>4231241232</td>
+<td>423124232</td>
+</tr>
+<tr>
+<td>1, 3, 4</td>
+<td>2312412321</td>
+<td>4231241231</td>
+<td>42312412321</td>
+<td>4231242321</td>
+</tr>
+<tr>
+<td>1, 2, 4</td>
+<td>231243121</td>
+<td>423124121</td>
+<td>4231243121</td>
+<td>42312423121</td>
+</tr>
+</table>
+<br /><br />
+
+<table border="1">
+<tr>
+<td>a=12</td>
+<td>1, 2, 3, 4</td>
+</tr>
+<tr>
+<td>1, 2, 3, 4</td>
+<td>423124123121</td>
+</tr>
+</table>
+
+
+
+
+
+
+</body>
+</html>
