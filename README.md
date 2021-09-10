@@ -6,7 +6,10 @@ The code was written to help find examples, counterexamples and conjectures, in 
 
 
 [1]: Some homological properties of category O, V. Submitted, arXiv:2007.00342.
+
 [2]: Bigrassmannian permutations and Verma modules. *Selecta Mathematica* **27**, 55 (2021).
+
 [3]: Some homological properties of category O, VI. To appear in *Documenta Mathematica*, arXiv:2101.05550.
+
 [4]: Join operation for the Bruhat order and Verma modules. Submitted, arXiv:2109.01067.
 
