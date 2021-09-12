@@ -1,4 +1,4 @@
-# BGG Category O and related combinatorics
+# BGG category O and related combinatorics
 
 The main file is a SageMath (version 9.2) notebook "Graded_characters_in_O_0.ipynb", which contains lots of functions for dealing with combinatorial calculations inside the BGG category O. For example, it contains graded characters of all structural modules (Verma, projective and tilting modules), Kazhdan-Lusztig orders, and Lustig's a-function.
 
