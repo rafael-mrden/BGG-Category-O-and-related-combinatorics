@@ -6,7 +6,7 @@ The folder `Graded_characters_in_O_0_data` contains lots of pre-calculated data,
 
 All the codes here were written to help find examples, counterexamples and conjectures, in joint works with Hankyung Ko and Volodymyr Mazorchuk presented in the following papers:
 1. Some homological properties of category O, V. To appear in *International Mathematics Research Notices*, [arXiv:2007.00342](https://arxiv.org/abs/2007.00342).
-2. Bigrassmannian permutations and Verma modules. CSelecta Mathematica* **27**, 55 (2021), [arXiv:2008.08864
+2. Bigrassmannian permutations and Verma modules. *Selecta Mathematica* **27**, 55 (2021), [arXiv:2008.08864
 ](https://arxiv.org/abs/2008.08864).     
 3. Some homological properties of category O, VI. *Documenta Mathematica* **26**, 1237-1269 (2021), [arXiv:2101.05550](https://arxiv.org/abs/2101.05550).
 4. Join operation for the Bruhat order and Verma modules. Submitted, [arXiv:2109.01067](https://arxiv.org/abs/2109.01067).
