@@ -9,5 +9,5 @@ All the codes here were written to help find examples, counterexamples and conje
 2. Bigrassmannian permutations and Verma modules. *Selecta Mathematica* **27**, 55 (2021), [arXiv:2008.08864
 ](https://arxiv.org/abs/2008.08864).     
 3. Some homological properties of category O, VI. *Documenta Mathematica* **26**, 1237-1269 (2021), [arXiv:2101.05550](https://arxiv.org/abs/2101.05550).
-4. Join operation for the Bruhat order and Verma modules. Submitted, [arXiv:2109.01067](https://arxiv.org/abs/2109.01067).
+4. Join operation for the Bruhat order and Verma modules. To appear in Israel Journal of Mathematics, [arXiv:2109.01067](https://arxiv.org/abs/2109.01067).
 
